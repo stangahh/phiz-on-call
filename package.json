@@ -1,0 +1,31 @@
+{
+  "name": "phiz-call-in",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build:watch": "yarn tsc -- -w",
+    "build": "yarn tsc",
+    "lint": "npx eslint .",
+    "prestart": "yarn build",
+    "start": "node ./dist/index.js",
+    "tsc": "tsc"
+  },
+  "author": "Stangahh <jesse.stanger@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "eslint": "^7.21.0",
+    "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/parser": "^4.0.0"
+  }
+}
