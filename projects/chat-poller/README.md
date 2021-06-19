@@ -1,4 +1,4 @@
-# on call
+# chat-poller
 
 `cp .env.example .env`
 
