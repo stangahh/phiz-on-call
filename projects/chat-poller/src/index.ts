@@ -31,6 +31,8 @@ const onMessageHandler = (
     return
   }
 
+  console.log('userState', userState)
+
   const message = msg.trim().split(' ')
 
   const emoteToMatch = /^phizEx$/
@@ -38,11 +40,15 @@ const onMessageHandler = (
   // t3
   if (message[0].match(emoteToMatch)) {
     console.log('trigger t3 action')
+    // make sure theyre t3
 
+    // optionally
     if (message[1].startsWith('@')) {
       console.log('trigger targeted action to', message[1])
-      // smack it on screen
+      // augment the action
     }
+
+    // perform action, (smack it on screen)
   }
 
   // parsing for the message
