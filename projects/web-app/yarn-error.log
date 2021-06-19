@@ -1,0 +1,55 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Jesse\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Jesse\bin;C:\Python39\Scripts;C:\Python39;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\Jesse\AppData\Local\Programs\Python\Python37\Scripts;C:\Users\Jesse\AppData\Local\Programs\Python\Python37;C:\Users\Jesse\AppData\Local\Microsoft\WindowsApps;C:\Users\Jesse\AppData\Roaming\npm;C:\Users\Jesse\AppData\Local\gitkraken\bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.16.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\Jesse\Documents\Development\phiz-call-in\projects\web-app\package.json: Unexpected token } in JSON at position 547
+      at JSON.parse (<anonymous>)
+      at C:\Users\Jesse\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Jesse\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\Jesse\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "phiz-call-in",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "type": "module",
+    "scripts": {
+      "build:watch": "yarn tsc -- -w",
+      "build": "yarn tsc",
+      "prestart": "yarn build",
+      "serve": "node ./dist/index.js",
+      "start": "yarn serve",
+      "tsc": "tsc"
+    },
+    "author": "Stangahh <jesse.stanger@gmail.com>",
+    "license": "ISC",
+    "dependencies": {
+      "dotenv": "^10.0.0",
+      "node-fetch": "^2.6.1",
+      "typescript": "^4.2.3"
+    },
+    "devDependencies": {
+      "@types/node-fetch": "^2.5.10",
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -7,11 +7,11 @@ services:
     restart: always
     env_file: ./projects/chat-poller/.env
 
-  # web-app:
-  #   build:
-  #     context: ./projects/web-app
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   env_file: .env
-  #   ports:
-  #     - '${PORT}:${PORT}'
+  web-app:
+    build:
+      context: ./projects/web-app
+      dockerfile: Dockerfile
+    restart: 'no'
+    env_file: ./projects/web-app/.env
+    ports:
+      - 3000:3000

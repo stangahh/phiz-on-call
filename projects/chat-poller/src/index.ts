@@ -30,7 +30,27 @@ const onMessageHandler = (
   if (isSelf) {
     return
   }
-  console.log(userState)
+
+  const message = msg.trim().split(' ')
+
+  const emoteToMatch = /^phizEx$/
+
+  // t3
+  if (message[0].match(emoteToMatch)) {
+    console.log('trigger t3 action')
+
+    if (message[1].startsWith('@')) {
+      console.log('trigger targeted action to', message[1])
+      // smack it on screen
+    }
+  }
+
+  // parsing for the message
+    // match the emote
+    // check sub level
+    // fire event to `web-app`
+
+  // console.log(userState)
 }
 
 function onConnectedHandler(addr: string, port: number) {
