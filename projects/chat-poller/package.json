@@ -1,0 +1,27 @@
+{
+  "name": "phiz-call-in",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build:watch": "yarn tsc -- -w",
+    "build": "yarn tsc",
+    "prestart": "yarn build",
+    "serve": "node ./dist/index.js",
+    "start": "yarn serve",
+    "tsc": "tsc"
+  },
+  "author": "Stangahh <jesse.stanger@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "node-fetch": "^2.6.1",
+    "tmi.js": "^1.8.3",
+    "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.10",
+    "@types/tmi.js": "^1.7.1"
+  }
+}

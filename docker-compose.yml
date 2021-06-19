@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  chat-poller:
+    build:
+      context: ./projects/chat-poller
+      dockerfile: Dockerfile
+    restart: always
+    env_file: ./projects/chat-poller/.env
+
+  # web-app:
+  #   build:
+  #     context: ./projects/web-app
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   env_file: .env
+  #   ports:
+  #     - '${PORT}:${PORT}'
