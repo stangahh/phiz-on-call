@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "type": "module",
   "scripts": {
     "build:watch": "yarn tsc -- -w",
     "build": "yarn tsc",
     "prestart": "yarn build",
+    "preserve": "cp -rf ./src/views ./dist/",
     "serve": "node ./dist/index.js",
     "start": "yarn serve",
     "tsc": "tsc"
@@ -15,7 +15,17 @@
   "author": "Stangahh <jesse.stanger@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "pug": "^3.0.2",
     "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/compression": "^1.7.0",
+    "@types/express": "^4.17.12",
+    "@types/pug": "^2.0.4"
   }
 }
