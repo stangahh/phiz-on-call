@@ -1,4 +1,5 @@
 import { config as DotEnvConfig } from 'dotenv'
+import fetch from 'node-fetch'
 import { ChatUserstate, Client, Options } from 'tmi.js'
 
 DotEnvConfig()
@@ -20,8 +21,13 @@ const options: Options = {
 
 const client = new Client(options)
 
+interface WebAppParams {
+  action?: 'start-calling',
+  target?: string,
+}
+
 /** Actions to perform when a new message is received */
-const onMessageHandler = (
+const onMessageHandler = async (
   channel: string,
   userState: ChatUserstate,
   msg: string,
@@ -35,28 +41,30 @@ const onMessageHandler = (
 
   const message = msg.trim().split(' ')
 
-  const emoteToMatch = /^phizEx$/
+  const emoteToMatch = /^COGGERS$/
 
   // t3
   if (message[0].match(emoteToMatch)) {
-    console.log('trigger t3 action')
-    // make sure theyre t3
+    // TODO: make sure theyre t3, early return if no
+
+    const payload: WebAppParams = {};
+
+    payload.action = 'start-calling'
 
     // optionally
-    if (message[1].startsWith('@')) {
+    if (message[1]?.startsWith('@')) {
       console.log('trigger targeted action to', message[1])
       // augment the action
+      payload.action = 'start-calling'
+      payload.target = message[1]
     }
 
-    // perform action, (smack it on screen)
+    await fetch(`${process.env.WEB_APP_LINK}/action`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
   }
-
-  // parsing for the message
-    // match the emote
-    // check sub level
-    // fire event to `web-app`
-
-  // console.log(userState)
 }
 
 function onConnectedHandler(addr: string, port: number) {
