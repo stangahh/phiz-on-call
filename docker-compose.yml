@@ -13,5 +13,7 @@ services:
       dockerfile: Dockerfile
     restart: 'no'
     env_file: ./projects/web-app/.env
+    volumes:
+      - ./projects/web-app/src/views:/dist/views
     ports:
       - 3000:3000
