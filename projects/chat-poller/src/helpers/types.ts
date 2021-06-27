@@ -1,5 +1,5 @@
 type States =
-  | 'default'
+  | 'reset'
   | 'ringing'
   | 'answered'
   | 'message-bank'

@@ -1,8 +1,8 @@
 import { ChatUserstate } from 'tmi.js'
 import { answered } from './states/answered.js'
-import { reset } from './states/default.js'
 import { reject } from './states/force-rejected.js'
 import { messageBank } from './states/message-bank.js'
+import { reset } from './states/reset.js'
 import { incoming } from './states/ringing.js'
 
 /** Actions to perform when a new message is received */

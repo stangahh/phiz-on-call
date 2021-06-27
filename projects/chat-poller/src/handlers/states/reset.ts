@@ -3,7 +3,7 @@ import { WebAppParams } from '../../helpers/types.js'
 
 export const reset = (target: string) => {
   const payload: WebAppParams = {
-    action: 'default',
+    action: 'reset',
     target: target,
   }
 

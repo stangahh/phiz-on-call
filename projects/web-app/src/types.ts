@@ -1,5 +1,5 @@
 type States =
-  | 'default' // aka RESET
+  | 'reset' // aka RESET
   | 'ringing' // aka START
   | 'answered' // aka ACCEPT
   | 'message-bank' // aka DENY
