@@ -1,6 +1,9 @@
 import { ChatUserstate } from 'tmi.js'
-import { sendToClient } from '../helpers/fetch.js'
-import { WebAppParams } from '../helpers/types.js'
+import { answered } from './states/answered.js'
+import { reset } from './states/default.js'
+import { reject } from './states/force-rejected.js'
+import { messageBank } from './states/message-bank.js'
+import { incoming } from './states/ringing.js'
 
 /** Actions to perform when a new message is received */
 export const onMessageHandler = async (
@@ -15,35 +18,34 @@ export const onMessageHandler = async (
 
   console.log('userState', userState)
 
-  const message = msg.trim().split(' ')
+  const base = msg.trim().split(' ')
+  const selector = base[0]
+  let target = ''
 
-  const emoteToMatch = /^COGGERS$/
-
-  // t3
-  if (message[0].match(emoteToMatch)) {
-    // TODO: make sure theyre t3, early return if no
-
-    const payload: WebAppParams = {}
-
-    payload.action = 'ringing'
-
-    // optionally
-    if (message[1]?.startsWith('@')) {
-      console.log('trigger targeted action to', message[1])
-      // augment the action
-      payload.action = 'ringing'
-      payload.target = message[1]
-    }
-
-    await sendToClient(payload)
+  // if theres a target, reassign
+  if (base[1] && base[1].startsWith('@')) {
+    target = base[1]
   }
 
-  if (message[0].match(/STOP/)) {
-    const payload: WebAppParams = {
-      action: 'force-rejected',
-      target: '',
-    }
+  // ACTUAL
+  if (selector.match(/^START$/)) {
+    await incoming(target)
+  }
 
-    await sendToClient(payload)
+  // MOCK
+  if (selector.match(/^ACCEPT$/)) {
+    await answered(target)
+  }
+
+  if (selector.match(/^DENY$/)) {
+    await messageBank(target)
+  }
+
+  if (selector.match(/^END$/)) {
+    await reject(target)
+  }
+
+  if (selector.match(/^RESET$/)) {
+    await reset(target)
   }
 }

@@ -5,17 +5,7 @@ import {
 import compression from 'compression'
 import express, { Request, Response } from 'express'
 import path from 'path'
-
-/** Sync with `chat-poller` WebAppParams */
-interface WebAppParams {
-  action?:
-    | 'default'
-    | 'ringing'
-    | 'answered'
-    | 'message-bank'
-    | 'force-rejected'
-  target?: string
-}
+import { WebAppParams } from './types'
 
 const app = express()
 
