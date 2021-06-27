@@ -1,59 +1,13 @@
 extends layout
 
 block content
+  //- Sound Effects
   audio#audio(src='' autoplay)
 
+  //- Message Target
   p#target
+
+  //- Phone UI
   img#image(src=`${defaultImage}` style=`width:${dimension}px;height:${dimension}px;`)
 
-  script(type='text/javascript').
-    var INTERVAL = #{interval};
-
-    function showMessage(received) {
-      var imageEl = document.getElementById("image");
-      var targetEl = document.getElementById("target");
-      var audioSrcEl = document.getElementById("audio");
-
-      if (imageEl.src !== received.image) {
-        imageEl.src = received.image;
-      }
-
-      if (targetEl.textContent !== received.target) {
-        targetEl.textContent = received.target;
-      }
-
-      var audioSrcElSrc = audioSrcEl?.src.split(window.location.href)[1];
-
-      if (audioSrcElSrc !== received.sound.replaceAll(/^\//g, '')) {
-        audioSrcEl.src = received.sound;
-      }
-
-      audioSrcEl.loop = received.sound.match(/ringing/) && received.sound.match(/ringing/).length > 0;
-    }
-
-    async function subscribe() {
-      let response = await fetch("/subscribe");
-
-      if (response.status == 502) {
-        // Status 502 is a connection timeout error,
-        // may happen when the connection was pending for too long,
-        // and the remote server or a proxy closed it
-        // let's reconnect
-        await subscribe();
-      } else if (response.status != 200) {
-        // An error - let's show it
-        showMessage(message);
-        // Reconnect in one second
-        await new Promise(resolve => setTimeout(resolve, INTERVAL));
-        await subscribe();
-      } else {
-        // Get and show the message
-        let message = await response.json();
-        showMessage(message);
-        await new Promise(resolve => setTimeout(resolve, INTERVAL));
-        // Call subscribe() again to get the next message
-        await subscribe();
-      }
-    }
-
-    subscribe();
+  script(type='text/javascript' src="/assets/scripts/polling.js").

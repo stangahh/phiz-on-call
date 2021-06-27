@@ -1,9 +1,5 @@
 import { ChatUserstate } from 'tmi.js'
-import { answered } from './states/answered.js'
-import { reject } from './states/force-rejected.js'
-import { messageBank } from './states/message-bank.js'
-import { reset } from './states/reset.js'
-import { incoming } from './states/ringing.js'
+import { sendAction } from './action.js'
 
 /** Actions to perform when a new message is received */
 export const onMessageHandler = async (
@@ -16,36 +12,45 @@ export const onMessageHandler = async (
     return
   }
 
-  console.log('userState', userState)
-
   const base = msg.trim().split(' ')
-  const selector = base[0]
-  let target = ''
 
-  // if theres a target, reassign
-  if (base[1] && base[1].startsWith('@')) {
-    target = base[1]
+  let emote = ''
+  let target = ''
+  let tts = ''
+
+  // if at least 1
+  if (base.length > 0) {
+    emote = base[0]
+  }
+
+  if (base.length > 1) {
+    if (base[1].startsWith('@')) {
+      target = base[1]
+      tts = base.slice(2).join(' ')
+    } else {
+      tts = base.slice(1).join(' ')
+    }
   }
 
   // ACTUAL
-  if (selector.match(/^START$/)) {
-    await incoming(target)
+  if (emote.match(/^START$/)) {
+    await sendAction('ringing', target, tts)
   }
 
   // MOCK
-  if (selector.match(/^ACCEPT$/)) {
-    await answered(target)
+  if (emote.match(/^ACCEPT$/)) {
+    await sendAction('answered', target, tts)
   }
 
-  if (selector.match(/^DENY$/)) {
-    await messageBank(target)
+  if (emote.match(/^DENY$/)) {
+    await sendAction('message-bank', target, tts)
   }
 
-  if (selector.match(/^END$/)) {
-    await reject(target)
+  if (emote.match(/^HANG$/)) {
+    await sendAction('hang', target, tts)
   }
 
-  if (selector.match(/^RESET$/)) {
-    await reset(target)
+  if (emote.match(/^RESET$/)) {
+    await sendAction('reset', target, tts)
   }
 }

@@ -8,7 +8,7 @@ export const getImage = (action: WebAppParams['action']): string => {
       return 'https://thumbs.gfycat.com/MeanFluffyGlassfrog-max-1mb.gif'
     case 'message-bank':
       return 'https://raw.githubusercontent.com/emrekose26/RecordButton/master/art/recordbutton.gif'
-    case 'force-rejected':
+    case 'hang':
       return 'https://cdn.dribbble.com/users/1113077/screenshots/2801947/phone_calling.gif'
     case 'reset':
     default:

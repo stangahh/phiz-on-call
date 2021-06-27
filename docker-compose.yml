@@ -15,5 +15,6 @@ services:
     env_file: ./projects/web-app/.env
     volumes:
       - ./projects/web-app/src/views:/dist/views
+      - ./projects/web-app/assets:/dist/assets
     ports:
       - 3000:3000
