@@ -9,7 +9,7 @@ const options: Options = {
     username: process.env.AUTH_USERNAME,
     password: `oauth:${process.env.OAUTH_TOKEN}`,
   },
-  channels: ['phizzi'],
+  channels: ['stangahh'],
   options: {
     debug: true,
   },
@@ -21,8 +21,9 @@ const options: Options = {
 
 const client = new Client(options)
 
+/** Sync with `web-app` WebAppParams */
 interface WebAppParams {
-  action?: 'start-calling',
+  action?: 'default' | 'ringing' | 'answered' | 'message-bank' | 'force-rejected',
   target?: string,
 }
 
@@ -49,13 +50,13 @@ const onMessageHandler = async (
 
     const payload: WebAppParams = {};
 
-    payload.action = 'start-calling'
+    payload.action = 'ringing'
 
     // optionally
     if (message[1]?.startsWith('@')) {
       console.log('trigger targeted action to', message[1])
       // augment the action
-      payload.action = 'start-calling'
+      payload.action = 'ringing'
       payload.target = message[1]
     }
 
