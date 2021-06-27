@@ -1,14 +1,18 @@
 extends layout
 
 block content
-  img#target(src='https://media.tenor.com/images/938c2c961d67096c2fa46edc0c579d3b/tenor.gif' style='width:300px; height:300px;')
+  p#target
+  img#image(src='https://media.tenor.com/images/938c2c961d67096c2fa46edc0c579d3b/tenor.gif' style='width:300px; height:300px;')
 
   script(type='text/javascript').
     var INTERVAL = 2000;
 
-    function showMessage(message) {
-      var el = document.getElementById("target");
-      el.src = message;
+    function showMessage(received) {
+      console.log('showmessage', received.image, received.target);
+      var imageEl = document.getElementById("image");
+      var targetEl = document.getElementById("target");
+      imageEl.src = received.image;
+      targetEl.textContent = received.target;
     }
 
     async function subscribe() {
@@ -22,14 +26,14 @@ block content
         await subscribe();
       } else if (response.status != 200) {
         // An error - let's show it
-        showMessage(response.statusText);
+        showMessage(message);
         // Reconnect in one second
         await new Promise(resolve => setTimeout(resolve, INTERVAL));
         await subscribe();
       } else {
         // Get and show the message
         let message = await response.json();
-        showMessage(message.image);
+        showMessage(message);
         await new Promise(resolve => setTimeout(resolve, INTERVAL));
         // Call subscribe() again to get the next message
         await subscribe();
