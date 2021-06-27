@@ -22,7 +22,10 @@ app.use(bodyParserJson())
 
 app.get('/', (req: Request, res: Response) => {
   res.render('main', {
-    title: 'Home',
+    title: 'Phiz Call App',
+    defaultImage: image,
+    interval: 2000,
+    dimension: 300,
   })
 })
 

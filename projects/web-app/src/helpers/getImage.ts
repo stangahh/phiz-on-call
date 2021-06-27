@@ -1,6 +1,6 @@
 import { WebAppParams } from '../types.js'
 
-export const getImage = (action: WebAppParams['action']) => {
+export const getImage = (action: WebAppParams['action']): string => {
   switch (action) {
     case 'ringing':
       return 'https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/091cab3b-808f-4d0c-a614-08d4790979a5/incoming-call.gif'

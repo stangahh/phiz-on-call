@@ -2,10 +2,10 @@ extends layout
 
 block content
   p#target
-  img#image(src='https://media.tenor.com/images/938c2c961d67096c2fa46edc0c579d3b/tenor.gif' style='width:300px; height:300px;')
+  img#image(src=`${defaultImage}` style=`width:${dimension}px;height:${dimension}px;`)
 
   script(type='text/javascript').
-    var INTERVAL = 2000;
+    var INTERVAL = #{interval};
 
     function showMessage(received) {
       console.log('showmessage', received.image, received.target);
