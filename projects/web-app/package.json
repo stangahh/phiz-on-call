@@ -7,7 +7,7 @@
     "build:watch": "yarn tsc -- -w",
     "build": "yarn tsc",
     "prestart": "yarn build",
-    "preserve": "cp -rf ./src/views ./dist/",
+    "preserve": "cp -rf ./src/views ./dist/ && cp -rf ./assets ./dist/",
     "serve": "node ./dist/index.js",
     "start": "yarn serve",
     "tsc": "tsc"
