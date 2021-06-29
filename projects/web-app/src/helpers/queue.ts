@@ -25,19 +25,27 @@ export class Queue {
   }
 
   setCurrentAction = (action: States) => {
-    this.queue[0].action = action
-    this.queue[0].image = getImage(action)
+    if (this.queue.length) {
+      this.queue[0].action = action
+      this.queue[0].image = getImage(action)
+    }
   }
 
   setCurrentSound = (sound: string) => {
-    this.queue[0].sound = sound
+    if (this.queue.length) {
+      this.queue[0].sound = sound
+    }
   }
 
   setCurrentImage = (image: string) => {
-    this.queue[0].image = image
+    if (this.queue.length) {
+      this.queue[0].image = image
+    }
   }
 
   setCurrentTTS = (tts: string) => {
-    this.queue[0].tts = tts
+    if (this.queue.length) {
+      this.queue[0].tts = tts
+    }
   }
 }

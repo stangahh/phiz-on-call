@@ -22,18 +22,32 @@ async function updateUI(received) {
   }
 
   // set audio to loop only if its the `ringing` state
-  audioSrcEl.loop =
-    received.sound.match(/ringing/) &&
-    received.sound.match(/ringing/).length > 0
+  audioSrcEl.loop = received.sound.match(/ringing/)?.length > 0
 
   /** hash the target + message combination to make TTS only run once */
   const hash = received.target + JSON.stringify(received.tts)
 
   if (received.tts && !window[hash] && received.action === 'answered') {
+    // dedupe TTS
     window[hash] = true
-    // delay TTS by 500ms
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    window.speechSynthesis.speak(new SpeechSynthesisUtterance(received.tts))
+
+    // Voices are populated async, so we need to wait for them to arrive before speaking
+    window.speechSynthesis.onvoiceschanged = async () => {
+      // Setup voice
+      const voice = window.speechSynthesis
+        .getVoices()
+        .find((voice) => voice.voiceURI.startsWith('Microsoft James'))
+
+      const statement = new SpeechSynthesisUtterance(received.tts)
+
+      statement.voice = voice
+
+      // delay TTS by 1200ms, seems natural
+      await new Promise((resolve) => setTimeout(resolve, 1200))
+
+      // speak
+      window.speechSynthesis.speak(statement)
+    }
   }
 }
 

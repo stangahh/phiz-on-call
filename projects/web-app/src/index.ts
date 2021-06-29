@@ -52,10 +52,12 @@ app.get('/subscribe', (req: Request, res: Response) => {
 app.post('/action', async (req: Request, res: Response) => {
   const received: WebAppParams = req.body
 
+  console.log('Received action:', received)
+
   switch (received.action) {
     case 'ringing':
       jobQueue.push({
-        action: 'ringing',
+        action: received.action,
         image: getImage(received.action),
         target: received.target || '',
         tts: received.tts || '',
@@ -67,7 +69,7 @@ app.post('/action', async (req: Request, res: Response) => {
       // UI -> MSG_BANK_RECORDING if no action
       break
     case 'answered':
-      jobQueue.setCurrentAction('answered')
+      jobQueue.setCurrentAction(received.action)
       jobQueue.setCurrentSound('/assets/sound/pick-up.mp3')
 
       // queue pop and process
@@ -76,7 +78,7 @@ app.post('/action', async (req: Request, res: Response) => {
       // UI -> PAUSE
       break
     case 'hang':
-      jobQueue.setCurrentAction('hang')
+      jobQueue.setCurrentAction(received.action)
       jobQueue.setCurrentSound('/assets/sound/hang-up.mp3')
       await new Promise((resolve) => setTimeout(resolve, 5000))
       jobQueue.pop()
@@ -103,6 +105,7 @@ app.post('/action', async (req: Request, res: Response) => {
       // UI -> RESET
       break
   }
+  res.send()
 })
 
 app.listen(app.get('port'), () => {
