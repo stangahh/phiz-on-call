@@ -11,7 +11,7 @@ const options: Options = {
     username: process.env.AUTH_USERNAME,
     password: `oauth:${process.env.OAUTH_TOKEN}`,
   },
-  channels: ['stangahh'],
+  channels: [process.env.CHANNEL_TO_JOIN || 'twitch'],
   options: {
     debug: true,
   },

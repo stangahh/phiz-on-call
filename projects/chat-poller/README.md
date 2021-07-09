@@ -6,6 +6,10 @@ This application requires access to Twitch APIs via a Twitch account that you ha
 
 `cp .env.example .env`
 
+1. Fill `AUTH_USERNAME` environment variable with your developer account username
+
+1. Fill `CHANNEL_TO_JOIN` environment variable with the twitch chat you want to trail
+
 1. Register an `Application` on your [Twitch Developer Console][]
 
 1. Set the `OAuth Redirect URLs` to `http://localhost`

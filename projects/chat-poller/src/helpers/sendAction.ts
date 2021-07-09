@@ -1,5 +1,5 @@
-import { sendToClient } from '../helpers/fetch.js'
-import { WebAppParams } from '../helpers/types.js'
+import { sendToClient } from './fetch.js'
+import { WebAppParams } from './types.js'
 
 export const sendAction = (
   action: WebAppParams['action'],
