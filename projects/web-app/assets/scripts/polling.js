@@ -4,12 +4,12 @@ async function updateUI(received) {
   var audioSrcEl = document.getElementById('audio')
 
   // set new image if its changed
-  if (imageEl.src !== received.image) {
+  if (imageEl && imageEl.src !== received.image) {
     imageEl.src = received.image
   }
 
   // set new target paragraph if its changed
-  if (targetEl.textContent !== received.target) {
+  if (targetEl && targetEl.textContent !== received.target) {
     targetEl.textContent = received.target
   }
 

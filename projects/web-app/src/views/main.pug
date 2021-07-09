@@ -4,10 +4,11 @@ block content
   //- Sound Effects
   audio#audio(src='' autoplay)
 
-  //- Message Target
-  p#target
+  if SHOW_VISUALS == 'true'
+    //- Message Target
+    p#target
+    //- Phone UI
+    img#image(src=`${defaultImage}` style=`width:${dimension}px;height:${dimension}px;`)
 
-  //- Phone UI
-  img#image(src=`${defaultImage}` style=`width:${dimension}px;height:${dimension}px;`)
 
   script(type='text/javascript' src="/assets/scripts/polling.js").

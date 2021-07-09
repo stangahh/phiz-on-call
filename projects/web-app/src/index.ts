@@ -19,6 +19,8 @@ app.use(compression())
 app.use(bodyParserUrlencoded({ extended: false }))
 app.use(bodyParserJson())
 
+app.locals.SHOW_VISUALS = process.env.SHOW_VISUALS || false
+
 const jobQueue = new Queue()
 
 /** TODO: Implement */
