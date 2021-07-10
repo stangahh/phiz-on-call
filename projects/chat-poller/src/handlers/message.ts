@@ -13,6 +13,12 @@ export const onMessageHandler = async (
     return
   }
 
+  const isTier3 = userState.badges?.subscriber?.startsWith('30')
+
+  if (!isTier3) {
+    return
+  }
+
   const { emote, target, tts } = parseMessage(msg)
 
   await callAction(emote, target, tts)
