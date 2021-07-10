@@ -2,7 +2,9 @@
 
 ## Instructions
 
-1. Install [docker desktop][] and make sure its running in the background.
+1. Install [Docker Desktop][] and make sure its running in the background.
+
+1. Install [Node.js][].
 
 1. Create environment variable fields
 
@@ -17,7 +19,8 @@ cp ./projects/web-app/.env.example ./projects/web-app/.env
 1. Start the docker-compose stack
 
 ```bash
-   yarn compose # or, `npm run compose`
+   yarn compose # or, `npm run compose` if you don't have `yarn`
 ```
 
 [docker desktop]: https://www.docker.com/products/docker-desktop
+[node.js]: https://nodejs.org/en/download/
