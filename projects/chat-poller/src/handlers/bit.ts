@@ -3,7 +3,7 @@ import { callAction } from '../helpers/callAction.js'
 import { parseMessage } from '../helpers/parseMessage.js'
 
 /** Minimum number of bits to trigger an action */
-const MINIMUM_BITS = 500
+const MINIMUM_BITS = 100
 
 /** Actions to perform when a new message is received */
 export const onBitHandler = async (
