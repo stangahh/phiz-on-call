@@ -5,8 +5,6 @@ export const callAction = async (
   target: string,
   tts: string,
 ) => {
-  // TODO: Add check for subscriber is T3
-
   // ACTUAL
   if (emote.match(/^phizCall$/)) {
     await sendAction('ringing', target, tts)

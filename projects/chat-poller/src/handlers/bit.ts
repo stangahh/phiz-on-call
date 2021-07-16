@@ -1,6 +1,6 @@
 import { ChatUserstate } from 'tmi.js'
-import { callAction } from '../helpers/callAction.js'
-import { parseMessage } from '../helpers/parseMessage.js'
+import { parseBitMessage } from '../helpers/parseBitMessage.js'
+import { sendAction } from '../helpers/sendAction.js'
 
 /** Minimum number of bits to trigger an action */
 const MINIMUM_BITS = 100
@@ -13,7 +13,7 @@ export const onBitHandler = async (
 ) => {
   if (userState.bits && Number(userState.bits) < MINIMUM_BITS) return
 
-  const { emote, target, tts } = parseMessage(msg)
+  const { target, tts } = parseBitMessage(msg)
 
-  await callAction(emote, target, tts)
+  if (target !== '' && tts !== '') await sendAction('ringing', target, tts)
 }

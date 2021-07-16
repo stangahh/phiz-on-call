@@ -12,7 +12,7 @@ export const parseMessage = (msg: string) => {
 
   if (base.length > 1) {
     if (base[1].startsWith('@')) {
-      target = base[1]
+      target = base[1].replaceAll(/@+/g, '@')
       tts = base.slice(2).join(' ')
     } else {
       tts = base.slice(1).join(' ')
