@@ -22,5 +22,13 @@ cp ./projects/web-app/.env.example ./projects/web-app/.env
    yarn compose # or, `npm run compose` if you don't have `yarn`
 ```
 
+1. Start the keybind listener
+
+```bash
+   yarn listen # or, `npm run listen` if you don't have `yarn`
+```
+
+> You can configure the keyboard binds inside [keybindListener.py](./keybindListener.py)
+
 [docker desktop]: https://www.docker.com/products/docker-desktop
 [node.js]: https://nodejs.org/en/download/

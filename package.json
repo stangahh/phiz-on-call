@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "compose": "docker-compose up --build"
+    "compose": "docker-compose up --build",
+    "listen": "python ./keybindListener.py"
   },
   "author": "Stangahh <jesse.stanger@gmail.com>",
   "license": "ISC"
