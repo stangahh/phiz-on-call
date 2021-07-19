@@ -52,9 +52,7 @@ app.get('/subscribe', (req: Request, res: Response) => {
 })
 
 app.post('/action', async (req: Request, res: Response) => {
-  const received: WebAppParams = req.body
-
-  console.log('Received action:', received)
+  const received: WebAppParams = JSON.parse(JSON.stringify(req.body))
 
   switch (received.action) {
     case 'ringing':
