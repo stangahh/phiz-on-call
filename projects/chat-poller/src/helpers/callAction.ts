@@ -1,13 +1,14 @@
 import { sendAction } from './sendAction.js'
 
 export const callAction = async (
+  user: string,
   emote: string,
   target: string,
   tts: string,
 ) => {
   // ACTUAL
   if (emote.match(/^phizCall$/)) {
-    await sendAction('ringing', target, tts)
+    await sendAction(user, 'ringing', target, tts)
   }
 
   // MOCK

@@ -6,7 +6,7 @@ export const parseBitMessage = (msg: string) => {
 
   if (base.length > 1) {
     if (base[0].startsWith('@')) {
-      target = base[0].replaceAll(/@+/g, '@')
+      target = base[0]
       tts = base.slice(1).join(' ')
     } else {
       tts = base.slice(0).join(' ')

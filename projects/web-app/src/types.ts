@@ -7,6 +7,7 @@ export type States =
 
 /** Sync with `web-app` WebAppParams */
 export interface WebAppParams {
+  user: string
   action: States
   target?: string
   tts?: string

@@ -1,5 +1,6 @@
 import { ChatUserstate } from 'tmi.js'
 import { parseBitMessage } from '../helpers/parseBitMessage.js'
+import { getRandomNumber } from '../helpers/random.js'
 import { sendAction } from '../helpers/sendAction.js'
 
 /** Minimum number of bits to trigger an action */
@@ -15,5 +16,11 @@ export const onBitHandler = async (
 
   const { target, tts } = parseBitMessage(msg)
 
-  if (target !== '' && tts !== '') await sendAction('ringing', target, tts)
+  if (target !== '' && tts !== '')
+    await sendAction(
+      userState.username || 'unknownUser' + getRandomNumber(),
+      'ringing',
+      target,
+      tts,
+    )
 }

@@ -1,3 +1,26 @@
+async function synthVoice(text) {
+  return new Promise(
+    (resolve) => (window.speechSynthesis.onvoiceschanged = resolve),
+  ).then(() => {
+    const synth = window.speechSynthesis
+
+    var voices = synth.getVoices()
+
+    const utterance = new SpeechSynthesisUtterance()
+    utterance.voice = voices[3]
+    utterance.text = text
+
+    synth.speak(utterance)
+  })
+}
+
+function speak(message) {
+  var msg = new SpeechSynthesisUtterance(message)
+  var voices = window.speechSynthesis.getVoices()
+  msg.voice = voices[0]
+  window.speechSynthesis.speak(msg)
+}
+
 async function updateUI(received) {
   var imageEl = document.getElementById('image')
   var targetEl = document.getElementById('target')
@@ -25,35 +48,23 @@ async function updateUI(received) {
   audioSrcEl.loop = received.sound.match(/ringing/)?.length > 0
 
   /** hash the target + message combination to make TTS only run once */
-  const hash = received.target + JSON.stringify(received.tts)
+  const hash = received.user + received.target + received.tts
 
   if (received.tts && !window[hash] && received.action === 'answered') {
     // dedupe TTS
     window[hash] = true
 
-    // Voices are populated async, so we need to wait for them to arrive before speaking
-    window.speechSynthesis.onvoiceschanged = async () => {
-      // Setup voice
-      const voice = window.speechSynthesis
-        .getVoices()
-        .find((voice) => voice.voiceURI.startsWith('Microsoft James'))
+    // delay TTS by 1200ms, seems natural
+    await new Promise((resolve) => setTimeout(resolve, 1200))
 
-      const statement = new SpeechSynthesisUtterance(received.tts)
-
-      statement.voice = voice
-
-      // delay TTS by 1200ms, seems natural
-      await new Promise((resolve) => setTimeout(resolve, 1200))
-
-      // speak
-      window.speechSynthesis.speak(statement)
-    }
+    // speak
+    speak(received.tts)
   }
 }
 
 async function subscribe() {
   let response = await fetch('/subscribe')
-  var INTERVAL = 2000 //ms
+  var INTERVAL = 2000 // ms
 
   if (response.status == 502) {
     // Status 502 is a connection timeout error,

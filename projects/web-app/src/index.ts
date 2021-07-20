@@ -41,6 +41,7 @@ app.get('/subscribe', (req: Request, res: Response) => {
     state = jobQueue.peek()
   } else {
     state = {
+      user: 'unknownUser',
       action: 'reset',
       image: getImage('reset'),
       sound: '',
@@ -59,33 +60,23 @@ app.post('/action', async (req: Request, res: Response) => {
   switch (received.action) {
     case 'ringing':
       jobQueue.push({
+        user: received.user,
         action: received.action,
         image: getImage(received.action),
         target: received.target || '',
         tts: received.tts || '',
         sound: '/assets/sound/ringing.mp3',
       })
-      // push to queue
-      // UI -> RINGING
-      // Delay
-      // UI -> MSG_BANK_RECORDING if no action
       break
     case 'answered':
       jobQueue.setCurrentAction(received.action)
       jobQueue.setCurrentSound('/assets/sound/pick-up.mp3')
-
-      // queue pop and process
-      // UI -> ANSWERED
-      // play TTS message
-      // UI -> PAUSE
       break
     case 'hang':
       jobQueue.setCurrentAction(received.action)
       jobQueue.setCurrentSound('/assets/sound/hang-up.mp3')
       await new Promise((resolve) => setTimeout(resolve, 5000))
       jobQueue.pop()
-      // skip current queue head
-      // UI -> RESET
       break
     /**
     case 'message-bank':
@@ -103,8 +94,6 @@ app.post('/action', async (req: Request, res: Response) => {
     case 'reset':
     default:
       jobQueue.clear()
-      // Cancel any in progress
-      // UI -> RESET
       break
   }
   res.send()
