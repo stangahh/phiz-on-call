@@ -24,14 +24,13 @@ async function updateUI(received) {
 
   // Get the src of the audio element, subtract current url for comparison
   if (!audioSrcEl) return
+
   var audioSrcElSrc = audioSrcEl.src.split(window.location.href)[1]
 
+  if (!received.sound) return
+
   // if its changed, set it. Otherwise autoplay will re-run this sound on dom update
-  if (
-    audioSrcElSrc !== received &&
-    received.sound &&
-    received.sound.replaceAll(/^\//g, '')
-  ) {
+  if (audioSrcElSrc !== received && received.sound.replace(/^\//g, '')) {
     audioSrcEl.src = received.sound
   }
 
