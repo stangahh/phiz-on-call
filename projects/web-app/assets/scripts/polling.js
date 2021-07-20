@@ -37,7 +37,9 @@ async function updateUI(received) {
   // set audio to loop only if its the `ringing` state
   if (!received.sound) return
 
-  audioSrcEl.loop = received.sound.match(/ringing/).length > 0
+  audioSrcEl.loop =
+    received.sound.match(/ringing/) &&
+    received.sound.match(/ringing/).length > 0
 
   /** hash the target + message combination to make TTS only run once */
   const hash = received.user + received.target + received.tts
