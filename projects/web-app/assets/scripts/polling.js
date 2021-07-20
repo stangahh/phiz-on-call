@@ -30,16 +30,12 @@ async function updateUI(received) {
   if (!received.sound) return
 
   // if its changed, set it. Otherwise autoplay will re-run this sound on dom update
-  if (audioSrcElSrc !== received && received.sound.replace(/^\//g, '')) {
+  if (audioSrcElSrc !== received.sound.replace(/^\//g, '')) {
     audioSrcEl.src = received.sound
   }
 
   // set audio to loop only if its the `ringing` state
-  if (!received.sound) return
-
-  audioSrcEl.loop =
-    received.sound.match(/ringing/) &&
-    received.sound.match(/ringing/).length > 0
+  audioSrcEl.loop = !!received.sound.match(/ringing/)
 
   /** hash the target + message combination to make TTS only run once */
   const hash = received.user + received.target + received.tts
