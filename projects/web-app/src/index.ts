@@ -54,6 +54,8 @@ app.get('/subscribe', (req: Request, res: Response) => {
 app.post('/action', async (req: Request, res: Response) => {
   const received: WebAppParams = JSON.parse(JSON.stringify(req.body))
 
+  console.log('Received', received.action)
+
   switch (received.action) {
     case 'ringing':
       jobQueue.push({
