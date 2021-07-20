@@ -1,23 +1,9 @@
-async function synthVoice(text) {
-  return new Promise(
-    (resolve) => (window.speechSynthesis.onvoiceschanged = resolve),
-  ).then(() => {
-    const synth = window.speechSynthesis
-
-    var voices = synth.getVoices()
-
-    const utterance = new SpeechSynthesisUtterance()
-    utterance.voice = voices[3]
-    utterance.text = text
-
-    synth.speak(utterance)
-  })
-}
-
 function speak(message) {
   var msg = new SpeechSynthesisUtterance(message)
-  var voices = window.speechSynthesis.getVoices()
-  msg.voice = voices[0]
+  const voice = window.speechSynthesis
+    .getVoices()
+    .find((voice) => voice.voiceURI.startsWith('Microsoft James'))
+  msg.voice = voice
   window.speechSynthesis.speak(msg)
 }
 
@@ -39,6 +25,7 @@ async function updateUI(received) {
   // Get the src of the audio element, subtract current url for comparison
   var audioSrcElSrc = audioSrcEl?.src.split(window.location.href)[1]
 
+  console.log(received.sound)
   // if its changed, set it. Otherwise autoplay will re-run this sound on dom update
   if (audioSrcElSrc !== received.sound.replaceAll(/^\//g, '')) {
     audioSrcEl.src = received.sound
@@ -59,6 +46,11 @@ async function updateUI(received) {
 
     // speak
     speak(received.tts)
+  }
+
+  // kill tts if you move beyond answered (hang or reset etc)
+  if (received.action !== 'answered') {
+    window.speechSynthesis.cancel()
   }
 }
 
