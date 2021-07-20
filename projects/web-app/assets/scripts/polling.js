@@ -23,15 +23,22 @@ async function updateUI(received) {
   }
 
   // Get the src of the audio element, subtract current url for comparison
-  var audioSrcElSrc = audioSrcEl?.src.split(window.location.href)[1]
+  if (!audioSrcEl) return
+  var audioSrcElSrc = audioSrcEl.src.split(window.location.href)[1]
 
   // if its changed, set it. Otherwise autoplay will re-run this sound on dom update
-  if (audioSrcElSrc !== received.sound.replaceAll(/^\//g, '')) {
+  if (
+    audioSrcElSrc !== received &&
+    received.sound &&
+    received.sound.replaceAll(/^\//g, '')
+  ) {
     audioSrcEl.src = received.sound
   }
 
   // set audio to loop only if its the `ringing` state
-  audioSrcEl.loop = received.sound.match(/ringing/)?.length > 0
+  if (!received.sound) return
+
+  audioSrcEl.loop = received.sound.match(/ringing/).length > 0
 
   /** hash the target + message combination to make TTS only run once */
   const hash = received.user + received.target + received.tts
