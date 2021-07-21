@@ -4,12 +4,15 @@ export const parseBitMessage = (msg: string) => {
   let target = ''
   let tts = ''
 
-  if (base.length > 1) {
-    if (base[0].startsWith('@')) {
-      target = base[0]
-      tts = base.slice(1).join(' ')
+  // remove cheer from message, parse remainder to construct target and tts
+  const messageParts = base.filter((part) => !part.match(/^cheer[0-9]/g))
+
+  if (messageParts.length > 0) {
+    if (messageParts[0].startsWith('@')) {
+      target = messageParts[0]
+      tts = messageParts.slice(1).join(' ')
     } else {
-      tts = base.slice(0).join(' ')
+      tts = messageParts.slice(0).join(' ')
     }
   }
 

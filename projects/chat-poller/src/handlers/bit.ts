@@ -16,11 +16,13 @@ export const onBitHandler = async (
 
   const { target, tts } = parseBitMessage(msg)
 
-  if (target !== '' && tts !== '')
-    await sendAction(
-      userState.username || 'unknownUser' + getRandomNumber(),
-      'ringing',
-      target,
-      tts,
-    )
+  // skip calling if no tts message
+  if (tts === '') return
+
+  await sendAction(
+    userState.username || 'unknownUser' + getRandomNumber(),
+    'ringing',
+    target,
+    tts,
+  )
 }
