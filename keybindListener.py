@@ -8,9 +8,9 @@ def post(state):
     requests.post(url, data = body)
     print("Sent", state)
 
-keyboard.on_press_key('f1', lambda e: post(str("answered")))
-keyboard.on_press_key('f2', lambda e: post(str("hang")))
-keyboard.on_press_key('f3', lambda e: post(str("reset")))
+keyboard.on_press_key('f2', lambda e: post(str("answered")))
+keyboard.on_press_key('f3', lambda e: post(str("hang")))
+keyboard.on_press_key('f4', lambda e: post(str("reset")))
 
 print("Waiting for input")
 
