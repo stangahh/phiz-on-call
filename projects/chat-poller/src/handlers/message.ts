@@ -4,7 +4,7 @@ import { parseMessage } from '../helpers/parseMessage.js'
 import { getRandomNumber } from '../helpers/random.js'
 
 /** Users who can skip the t3 check */
-const GODS = ['stangahh', 'phizzi', 'thegestoord', 'mayoketchup', 'toshichatzalot']
+const GODS = ['stangahh', 'phizzi', 'thegestoord', 'mayoketchup', 'Zindurn']
 
 /** Actions to perform when a new message is received */
 export const onMessageHandler = async (
